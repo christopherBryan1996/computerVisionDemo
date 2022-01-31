@@ -19,3 +19,4 @@
     <h2>Ejemplo</h2>
     <img class='grafica' src='ImageReadme\RGB_channels_separation.png'/>
 </div>
+
