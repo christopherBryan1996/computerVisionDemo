@@ -29,7 +29,7 @@ stats=output[2]
 mascara=(np.argmax(stats[:,4][1:])+1==label)
 mascara=ndimage.binary_fill_holes(mascara).astype(int)
 
-mascara1= np.uint8(mascara+255)
+mascara1= np.uint8(mascara*255)
 
 contours,_=cv2.findContours(mascara1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -68,4 +68,12 @@ plt.hist(verde, bins=1000,histtype='stepfilled',color='green')
 plt.hist(azul, bins=1000,histtype='stepfilled',color='blue')
 plt.show()
 
-cv2.imshow('img',img)
+segColor=np.zeros((m,n,3)).astype('uint8')
+segColor[:,:,0]=np.uint8(img[:,:,0]*mascara)
+segColor[:,:,1]=np.uint8(img[:,:,1]*mascara)
+segColor[:,:,2]=np.uint8(img[:,:,2]*mascara)
+
+segGrey=np.zeros((m,n))
+segGrey[:,:]=np.uint8(I*mascara)
+
+cv2.imshow('img',segColor)
